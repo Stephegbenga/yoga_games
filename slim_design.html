@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5e2c3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f2cfa6;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-bar select,
+        .filter-bar button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #b28c65;
+            background-color: #e3ba8b;
+            color: #4f321d;
+        }
+
+        .yogi-metre {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .yogi-metre h2 {
+            color: #c8752a;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background-color: #f2cfa6;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 25px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress {
+            background-color: #c8752a;
+            height: 100%;
+            width: 100%; /* This width would be dynamic based on the user's progress */
+            text-align: right;
+            padding-right: 10px;
+            line-height: 25px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .current-level {
+            font-size: 18px;
+            color: #4f321d;
+            margin-bottom: 10px;
+        }
+
+        .attend-class-btn {
+            padding: 10px 20px;
+            background-color: #c8752a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .attend-class-btn:hover {
+            background-color: #af6623;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Filter Bar Section -->
+        <div class="filter-bar">
+            <select>
+                <option value="all">Class Type: All</option>
+                <!-- Other options -->
+            </select>
+            <select>
+                <option value="all">Level: All</option>
+                <!-- Other options -->
+            </select>
+            <select>
+                <option value="all">Duration: All</option>
+                <!-- Other options -->
+            </select>
+            <select>
+                <option value="all">Instructors: All</option>
+                <!-- Other options -->
+            </select>
+            <select>
+                <option value="all">Language: All</option>
+                <!-- Other options -->
+            </select>
+            <button>Daily Practice Schedule</button>
+            <button>CLEAR</button>
+        </div>
+
+        <!-- Yogi Metre Section -->
+        <div class="yogi-metre">
+            <h2>Yogi Metre</h2>
+            <div class="progress-bar">
+                <div class="progress" style="width: 100%;">14/14 Classes</div>
+            </div>
+            <div class="current-level">Current Level: Great Yogi (Maha Yogi)</div>
+            <button class="attend-class-btn">👍 Attend Class</button>
+        </div>
+
+        <!-- Placeholder for the rest of the calendar content -->
+        <div class="calendar-content">
+            <!-- Calendar items go here -->
+        </div>
+    </div>
+</body>
+</html>
