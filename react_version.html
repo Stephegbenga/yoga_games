@@ -1,0 +1,214 @@
+<div id="root"></div>
+
+<!-- Add React and Babel library scripts -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- Create a React component and render it -->
+<script type="text/babel">
+  const { useState, useEffect } = React;
+
+  const styles = {
+    // body: {
+    //   fontFamily: "'Arial', sans-serif",
+    //   backgroundColor: "#f8e5c2",
+    //   color: "#333",
+    //   margin: 0,
+    //   padding: 0,
+    //   display: "flex",
+    //   flexDirection: "column",
+    //   alignItems: "center",
+    //   justifyContent: "center",
+    //   height: "100vh",
+    // },
+    scoreBoard: {
+      position: "absolute",
+      top: "10px",
+      right: "10px",
+      fontSize: "16px",
+      backgroundColor: "#ffcc80",
+      padding: "10px",
+      borderRadius: "5px",
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    },
+    gameCard: {
+      backgroundColor: "#ffe8ca",
+      borderRadius: "8px",
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      width: "300px",
+      overflow: "hidden",
+      transition: "transform 0.3s",
+      textAlign: "center",
+    },
+    gameImg: {
+      width: "100%",
+      height: "200px",
+      objectFit: "cover",
+    },
+    gameInfo: {
+      padding: "20px",
+    },
+    gameTitle: {
+      fontSize: "18px",
+      marginBottom: "10px",
+      color: "#d17d0d",
+    },
+    gameDescription: {
+      fontSize: "14px",
+      marginBottom: "15px",
+    },
+    answerButton: {
+      backgroundColor: "#8c6239",
+      color: "#fff",
+      textAlign: "center",
+      padding: "10px",
+      borderRadius: "5px",
+      textDecoration: "none",
+      fontWeight: "bold",
+      transition: "background-color 0.3s",
+      marginTop: "10px",
+      cursor: "pointer",
+    },
+    answerButtonHover: {
+      backgroundColor: "#a87541",
+    },
+    result: {
+      marginTop: "10px",
+      fontWeight: "bold",
+    },
+  };
+
+  const gamesData = [
+            {
+                id: 'englishGame',
+                title: 'Find the Correct Pose Name - English',
+                description: 'Choose the correct English name for the displayed yoga pose.',
+                image: 'https://d30yihluwpc648.cloudfront.net/photo_file_manager/_401.jpg',
+                options: [
+                { text: 'Lotus Pose', isCorrect: true },
+                { text: 'Tree Pose', isCorrect: false },
+                { text: 'Warrior Pose', isCorrect: false }
+                ]
+            },
+            {
+                id: 'sanskritGame',
+                title: 'Find the Correct Pose Name - Sanskrit',
+                description: 'Choose the correct Sanskrit name for the displayed yoga pose.',
+                image: 'https://d30yihluwpc648.cloudfront.net/photo_file_manager/_363.jpg',
+                options: [
+                { text: 'Parsavasana', isCorrect: true },
+                { text: 'Vrksasana', isCorrect: false },
+                { text: 'Virabhadrasana', isCorrect: false }
+                ]
+            },
+            {
+                id: 'poseGame',
+                title: 'Find the Correct Pose',
+                description: 'Select the correct pose based on the given name.',
+                image: null,
+                poseName: 'Vatha',
+                options: [
+                { image: 'https://d30yihluwpc648.cloudfront.net/photo_file_manager/_392.jpg', isCorrect: false },
+                { image: 'https://d30yihluwpc648.cloudfront.net/photo_file_manager/_400.jpg', isCorrect: true },
+                { image: 'https://d30yihluwpc648.cloudfront.net/photo_file_manager/_392.jpg', isCorrect: false }
+                ]
+            },
+            {
+                id: 'chakraGame',
+                title: 'Find the Correct Chakra',
+                description: 'Identify the correct chakra associated with the displayed pose.',
+                image: 'https://example.com/pose4.jpg',
+                options: [
+                { text: 'Root', isCorrect: true },
+                { text: 'Heart', isCorrect: false },
+                { text: 'Crown', isCorrect: false }
+                ]
+            },
+            {
+                id: 'dosaGame',
+                title: 'Find the Right Dosa',
+                description: 'Choose the correct dosa associated with the displayed pose.',
+                image: 'https://example.com/pose5.jpg',
+                options: [
+                { text: 'Vata', isCorrect: false },
+                { text: 'Pitta', isCorrect: true },
+                { text: 'Kapha', isCorrect: false }
+                ]
+            }
+        ];
+
+  function App() {
+    const [totalScore, setTotalScore] = useState(0);
+    const [remainingGames, setRemainingGames] = useState(gamesData);
+    const [currentGame, setCurrentGame] = useState(null);
+
+    useEffect(() => {
+      startGame();
+    }, []);
+
+    const startGame = () => {
+      if (remainingGames.length > 0) {
+        const randomIndex = Math.floor(Math.random() * remainingGames.length);
+        const nextGame = remainingGames[randomIndex];
+        setRemainingGames((prevGames) =>
+          prevGames.filter((game) => game.id !== nextGame.id)
+        );
+        setCurrentGame(nextGame);
+      } else {
+        alert("All games completed!");
+      }
+    };
+
+    const checkAnswer = (isCorrect) => {
+      if (isCorrect) {
+        setTotalScore((prevScore) => prevScore + 1);
+      }
+      setTimeout(() => {
+        startGame();
+      }, 1000);
+    };
+
+    return (
+      <div style={styles.body}>
+        <div style={styles.scoreBoard}>Score: {totalScore}</div>
+        {currentGame && (
+          <div style={styles.gameCard}>
+            <div style={styles.gameInfo}>
+              <h3 style={styles.gameTitle}>{currentGame.title}</h3>
+              <p style={styles.gameDescription}>{currentGame.description}</p>
+              {currentGame.image && (
+                <img
+                  src={currentGame.image}
+                  alt="Yoga Pose"
+                  style={styles.gameImg}
+                />
+              )}
+              {currentGame.poseName && <h3>{currentGame.poseName}</h3>}
+              {currentGame.options.map((option, index) => (
+                <div
+                  key={index}
+                  style={styles.answerButton}
+                  onClick={() => checkAnswer(option.isCorrect)}
+                >
+                  {option.text || (
+                    <img
+                      src={option.image}
+                      alt={`Pose ${index + 1}`}
+                      style={{ width: "100%" }}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<App />);
+</script>
+</body>
+</html>

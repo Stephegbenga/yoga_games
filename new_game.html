@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Games</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8e5c2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .score-board {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 16px;
+            background-color: #ffcc80;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .game-card {
+            background-color: #ffe8ca;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            text-align: center;
+            display: none;
+        }
+        .game-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .game-info {
+            padding: 20px;
+        }
+        .game-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #d17d0d;
+        }
+        .game-description {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .answer-button {
+            background-color: #8c6239;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .answer-button:hover {
+            background-color: #a87541;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="score-board" id="scoreBoard">
+        Score: 0
+    </div>
+
+    <div id="englishGame" class="game-card">
+        <div class="game-info">
+            <h3 class="game-title">Find the Correct Pose Name - English</h3>
+            <p class="game-description">Choose the correct English name for the displayed yoga pose.</p>
+            <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_401.jpg" alt="Yoga Pose" class="game-img">
+            <div class="answer-button" onclick="checkAnswer('englishGame', 'Lotus Pose', true)">Lotus Pose</div>
+            <div class="answer-button" onclick="checkAnswer('englishGame', 'Tree Pose', false)">Tree Pose</div>
+            <div class="answer-button" onclick="checkAnswer('englishGame', 'Warrior Pose', false)">Warrior Pose</div>
+            <div id="englishGameResult" class="result"></div>
+        </div>
+    </div>
+
+    <div id="sanskritGame" class="game-card">
+        <div class="game-info">
+            <h3 class="game-title">Find the Correct Pose Name - Sanskrit</h3>
+            <p class="game-description">Choose the correct Sanskrit name for the displayed yoga pose.</p>
+            <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_363.jpg" alt="Yoga Pose" class="game-img">
+            <div class="answer-button" onclick="checkAnswer('sanskritGame', 'Parsavasana', true)">Parsavasana</div>
+            <div class="answer-button" onclick="checkAnswer('sanskritGame', 'Vrksasana', false)">Vrksasana</div>
+            <div class="answer-button" onclick="checkAnswer('sanskritGame', 'Virabhadrasana', false)">Virabhadrasana</div>
+            <div id="sanskritGameResult" class="result"></div>
+        </div>
+    </div>
+
+    <div id="poseGame" class="game-card">
+        <div class="game-info">
+            <h3 class="game-title">Find the Correct Pose</h3>
+            <p class="game-description">Select the correct pose based on the given name.</p>
+            <h3>Vatha</h3>
+            <div class="answer-button">
+                <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_392.jpg" alt="Pose 1" onclick="checkAnswer('poseGame', 'correct', false)" style="width: 100%; cursor: pointer;">
+            </div>
+            <div class="answer-button">
+                <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_400.jpg" alt="Pose 2" onclick="checkAnswer('poseGame', 'correct', true)" style="width: 100%; cursor: pointer;">
+            </div>
+            <div class="answer-button">
+                <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_392.jpg" alt="Pose 3" onclick="checkAnswer('poseGame', 'correct', false)" style="width: 100%; cursor: pointer;">
+            </div>
+            <div id="poseGameResult" class="result"></div>
+        </div>
+    </div>
+
+    <div id="chakraGame" class="game-card">
+        <div class="game-info">
+            <h3 class="game-title">Find the Correct Chakra</h3>
+            <p class="game-description">Identify the correct chakra associated with the displayed pose.</p>
+            <img src="https://example.com/pose4.jpg" alt="Yoga Pose" class="game-img">
+            <div class="answer-button" onclick="checkAnswer('chakraGame', 'Root', true)">Root</div>
+            <div class="answer-button" onclick="checkAnswer('chakraGame', 'Heart', false)">Heart</div>
+            <div class="answer-button" onclick="checkAnswer('chakraGame', 'Crown', false)">Crown</div>
+            <div id="chakraGameResult" class="result"></div>
+        </div>
+    </div>
+
+    <div id="dosaGame" class="game-card">
+        <div class="game-info">
+            <h3 class="game-title">Find the Right Dosa</h3>
+            <p class="game-description">Choose the correct dosa associated with the displayed pose.</p>
+            <img src="https://example.com/pose5.jpg" alt="Yoga Pose" class="game-img">
+            <div class="answer-button" onclick="checkAnswer('dosaGame', 'Vata', false)">Vata</div>
+            <div class="answer-button" onclick="checkAnswer('dosaGame', 'Pitta', true)">Pitta</div>
+            <div class="answer-button" onclick="checkAnswer('dosaGame', 'Kapha', false)">Kapha</div>
+            <div id="dosaGameResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        let totalScore = 0;
+        const games = ['englishGame', 'sanskritGame', 'poseGame', 'chakraGame', 'dosaGame'];
+        let remainingGames = [...games];
+
+        function startGame() {
+            if (remainingGames.length > 0) {
+                const randomIndex = Math.floor(Math.random() * remainingGames.length);
+                const nextGameId = remainingGames[randomIndex];
+                remainingGames.splice(randomIndex, 1);
+                document.getElementById(nextGameId).style.display = 'block';
+            } else {
+                alert('All games completed!');
+            }
+        }
+
+        function checkAnswer(gameId, answer, isCorrect) {
+            const resultElement = document.getElementById(gameId + 'Result');
+            if (isCorrect) {
+                totalScore++;
+                updateScoreBoard();
+                resultElement.textContent = 'Correct!';
+                resultElement.style.color = 'green';
+            } else {
+                resultElement.textContent = 'Incorrect. Try Again!';
+                resultElement.style.color = 'red';
+                return;
+            }
+
+            // Hide the current game after a short delay and load the next game
+            setTimeout(() => {
+                document.getElementById(gameId).style.display = 'none';
+                startGame();
+            }, 1000);
+        }
+
+        function updateScoreBoard() {
+            const scoreBoard = document.getElementById('scoreBoard');
+            scoreBoard.textContent = `Score: ${totalScore}`;
+        }
+
+        // Start the first game
+        startGame();
+    </script>
+</body>
+</html>
