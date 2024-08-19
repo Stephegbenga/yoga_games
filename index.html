@@ -3,187 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yoga Games</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8e5c2;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
-        .game-card {
-            background-color: #ffe8ca;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        .game-card:hover {
-            transform: translateY(-5px);
-        }
-        .game-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .game-info {
-            padding: 20px;
-        }
-        .game-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #d17d0d;
-        }
-        .game-description {
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .play-button, .answer-button {
-            display: block;
-            background-color: #8c6239;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .play-button:hover, .answer-button:hover {
-            background-color: #a87541;
-        }
-        .game-play-area {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        .result {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style>
+    <title>Yogi Metre</title>
 </head>
-<body>
-
-    <div class="container">
-        <!-- Game 1: Find the correct name of the poses - English -->
-        <div class="game-card">
-            <div class="game-info">
-                <h3 class="game-title">Find the Correct Pose Name - English</h3>
-                <p class="game-description">Choose the correct English name for the displayed yoga pose.</p>
-                <div class="play-button" onclick="startGame('englishGame')">Play</div>
-                <div id="englishGame" class="game-play-area">
-                    <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_401.jpg" alt="Yoga Pose" class="game-img">
-                    <div class="answer-button" onclick="checkAnswer('englishGame', 'Lotus Pose', true)">Lotus Pose</div>
-                    <div class="answer-button" onclick="checkAnswer('englishGame', 'Tree Pose', false)">Tree Pose</div>
-                    <div class="answer-button" onclick="checkAnswer('englishGame', 'Warrior Pose', false)">Warrior Pose</div>
-                    <div id="englishGameResult" class="result"></div>
-                </div>
+<body style="font-family: Arial, sans-serif; background-color: #f8e3c4; padding: 20px;">
+    <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <h2 style="color: #d17c26;">Yogi Metre</h2>
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div style="flex: 1; background-color: #ffd9a3; height: 10px; border-radius: 5px; position: relative; overflow: hidden;">
+                <div id="progress-bar" style="width: 25%; height: 100%; background-color: #d17c26;"></div>
             </div>
+            <span style="margin-left: 10px; color: #d17c26;">6/14 Classes</span>
         </div>
 
-        <!-- Game 2: Find the correct name of the pose - Sanskrit -->
-        <div class="game-card">
-            <div class="game-info">
-                <h3 class="game-title">Find the Correct Pose Name - Sanskrit</h3>
-                <p class="game-description">Choose the correct Sanskrit name for the displayed yoga pose.</p>
-                <div class="play-button" onclick="startGame('sanskritGame')">Play</div>
-                <div id="sanskritGame" class="game-play-area">
-                    <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_363.jpg" alt="Yoga Pose" class="game-img">
-                    <div class="answer-button" onclick="checkAnswer('sanskritGame', 'Parsavasana', true)">Parsavasana</div>
-                    <div class="answer-button" onclick="checkAnswer('sanskritGame', 'Vrksasana', false)">Vrksasana</div>
-                    <div class="answer-button" onclick="checkAnswer('sanskritGame', 'Virabhadrasana', false)">Virabhadrasana</div>
-                    <div id="sanskritGameResult" class="result"></div>
-                </div>
-            </div>
+        <div style="margin-bottom: 20px;">
+            <span style="color: #d17c26; font-weight: bold;">Levels:</span>
+            <p>Novice Yogi (3 classes) | Rising Yogi (6 classes) | Dedicated Yogi (8 classes) | Devoted Yogi (12 classes) | Great Yogi (14+ classes)</p>
         </div>
 
-     <!-- Game 3: Find the Correct Pose -->
-    <div class="game-card">
-        <div class="game-info">
-            <h3 class="game-title">Find the Correct Pose</h3>
-            <p class="game-description">Select the correct pose based on the given name.</p>
-            <div class="play-button" onclick="startGame('poseGame')">Play</div>
-            <div id="poseGame" class="game-play-area">
-                <h3>Vatha</h3>
-                <div class="answer-button">
-                    <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_392.jpg" alt="Pose 1" onclick="checkAnswer('poseGame', 'correct', false)" style="width: 100%; cursor: pointer;">
-                </div>
-                <div class="answer-button">
-                    <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_400.jpg" alt="Pose 2" onclick="checkAnswer('poseGame', 'correct', true)" style="width: 100%; cursor: pointer;">
-                </div>
-                <div class="answer-button">
-                    <img src="https://d30yihluwpc648.cloudfront.net/photo_file_manager/_392.jpg" alt="Pose 3" onclick="checkAnswer('poseGame', 'correct', false)" style="width: 100%; cursor: pointer;">
-                </div>
-                <div id="poseGameResult" class="result"></div>
-            </div>
+        <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
+            <button onclick="incrementClasses()" style="background-color: #d17c26; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <span style="margin-right: 5px;">👍</span> Attend Class
+            </button>
         </div>
+
+        <!-- Popup -->
+        <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; border: 2px solid #d17c26; padding: 20px; text-align: center; z-index: 1000; border-radius: 10px;">
+            <p style="color: #d17c26;" id="popup-message"></p>
+            <button onclick="closePopup()" style="background-color: #d17c26; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Close</button>
+        </div>
+        <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 500;"></div>
     </div>
-
-
-        <!-- Game 4: Find the correct chakra for the pose -->
-        <div class="game-card">
-            <div class="game-info">
-                <h3 class="game-title">Find the Correct Chakra</h3>
-                <p class="game-description">Identify the correct chakra associated with the displayed pose.</p>
-                <div class="play-button" onclick="startGame('chakraGame')">Play</div>
-                <div id="chakraGame" class="game-play-area">
-                    <img src="https://example.com/pose4.jpg" alt="Yoga Pose" class="game-img">
-                    <div class="answer-button" onclick="checkAnswer('chakraGame', 'Root', true)">Root</div>
-                    <div class="answer-button" onclick="checkAnswer('chakraGame', 'Heart', false)">Heart</div>
-                    <div class="answer-button" onclick="checkAnswer('chakraGame', 'Crown', false)">Crown</div>
-                    <div id="chakraGameResult" class="result"></div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Game 5: Find the right dosa for the pose -->
-        <div class="game-card">
-            <div class="game-info">
-                <h3 class="game-title">Find the Right Dosa</h3>
-                <p class="game-description">Choose the correct dosa associated with the displayed pose.</p>
-                <div class="play-button" onclick="startGame('dosaGame')">Play</div>
-                <div id="dosaGame" class="game-play-area">
-                    <img src="https://example.com/pose5.jpg" alt="Yoga Pose" class="game-img">
-                    <div class="answer-button" onclick="checkAnswer('dosaGame', 'Vata', false)">Vata</div>
-                    <div class="answer-button" onclick="checkAnswer('dosaGame', 'Pitta', true)">Pitta</div>
-                    <div class="answer-button" onclick="checkAnswer('dosaGame', 'Kapha', false)">Kapha</div>
-                    <div id="dosaGameResult" class="result"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <script>
-        function startGame(gameId) {
-            document.getElementById(gameId).style.display = 'flex';
+        let classesCompleted = 6; // Initial classes completed
+
+        function incrementClasses() {
+            if (classesCompleted < 14) {
+                classesCompleted++;
+                document.getElementById('progress-bar').style.width = `${(classesCompleted / 14) * 100}%`;
+                document.querySelector('span').innerText = `${classesCompleted}/14 Classes`;
+
+                checkMilestone(classesCompleted);
+            }
         }
 
-        function checkAnswer(gameId, answer, isCorrect) {
-            const resultElement = document.getElementById(gameId + 'Result');
-            if (isCorrect) {
-                resultElement.textContent = 'Correct!';
-                resultElement.style.color = 'green';
-            } else {
-                resultElement.textContent = 'Incorrect. Try Again!';
-                resultElement.style.color = 'red';
+        function checkMilestone(classes) {
+            let message = '';
+
+            if (classes === 3) {
+                message = 'Congratulations, You are 3 classes away from the next level: Rising Yogi!';
+            } else if (classes === 6) {
+                message = 'Congratulations, You are 2 classes away from the next level: Dedicated Yogi!';
+            } else if (classes === 8) {
+                message = 'Congratulations, You are 4 classes away from the next level: Devoted Yogi!';
+            } else if (classes === 12) {
+                message = 'Congratulations, You are 2 classes away from the next level: Great Yogi!';
+            } else if (classes === 14) {
+                message = 'We appreciate your sincerity and dedication to Yoga Practice!';
             }
+
+            if (message) {
+                document.getElementById('popup-message').innerText = message;
+                document.getElementById('popup').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
         }
     </script>
 </body>
 </html>
-
